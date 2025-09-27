@@ -1,0 +1,27 @@
+[Unit]
+Description=ArchFairFight Telegram Bot
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=archfairfight
+Group=archfairfight
+WorkingDirectory=/opt/archfairfight
+Environment=PATH=/opt/archfairfight/venv/bin
+ExecStart=/opt/archfairfight/venv/bin/python -m archfairfight.main
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=archfairfight
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/archfairfight/recordings /opt/archfairfight/logs /opt/archfairfight/sessions
+
+[Install]
+WantedBy=multi-user.target

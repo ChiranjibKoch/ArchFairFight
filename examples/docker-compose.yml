@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: archfairfight_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: archfairfight
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - archfairfight-network
+
+  archfairfight:
+    build: .
+    container_name: archfairfight_bot
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URL=mongodb://admin:password123@mongodb:27017/archfairfight?authSource=admin
+    volumes:
+      - ./sessions:/app/sessions
+      - ./recordings:/app/recordings
+      - ./logs:/app/logs
+      - ./.env:/app/.env
+    networks:
+      - archfairfight-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  archfairfight-network:
+    driver: bridge
