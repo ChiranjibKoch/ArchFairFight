@@ -1,2 +1,37 @@
 kurigram
-py-tgcallz
+tgcrypto==1.2.5
+py-tgcalls
+
+# Database
+pymongo==4.6.1
+motor==3.3.2
+
+# Async support
+asyncio-mqtt==0.16.1
+aiofiles==23.2.1
+
+# Audio/Video processing
+ffmpeg-python==0.2.0
+
+# Configuration and utilities
+python-dotenv==1.0.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# Logging
+structlog==23.2.0
+
+# Optional AI features
+numpy==1.26.3
+scipy==1.12.0
+
+# Development and testing
+pytest==8.0.0
+pytest-asyncio==0.23.4
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
+
+# Web interface (optional)
+fastapi==0.109.0
+uvicorn==0.27.0
